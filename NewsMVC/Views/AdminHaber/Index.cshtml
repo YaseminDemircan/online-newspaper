@@ -1,0 +1,61 @@
+﻿@model IEnumerable<NewsMVC.Models.Haber>
+
+@{
+    ViewBag.Title = "Haberler";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<p>
+    @Html.ActionLink("Yeni Ekle", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            Başlık
+        </th>
+        <th>
+            Giriş
+        </th>
+        <th>
+            İçerik
+        </th>
+        <th>
+            Tarih
+        </th>
+        <th>
+            Kategori
+        </th>
+        <th>
+            Resim
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Baslik)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Giris)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Icerik)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.EklenmeTarihi)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Kategori.KategoriAdi)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Resim.OrtaBoy)
+        </td>
+        <td>
+            @Html.ActionLink("Düzenle", "Edit", new { id=item.HaberID }) |
+            @Html.ActionLink("Sil", "Delete", new { id=item.HaberID })
+        </td>
+    </tr>
+}
+
+</table>

@@ -1,0 +1,57 @@
+﻿@using NewsMVC.Models;
+@using PagedList;
+@using PagedList.Mvc;
+@model IPagedList<Haber>
+
+@{
+    ViewBag.Title = "";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@helper contentPart(string metin)
+{
+if (metin.Length > 300)
+{
+        @metin.Substring(0, 300)
+}
+else
+{
+        @metin
+}
+}
+
+
+@foreach (Haber haber in Model)
+{
+    <div class="clearfix single_content">
+        <div class="clearfix post_date floatleft">
+            <div class="date">
+            </div>
+        </div>
+        <div class="clearfix post_detail">
+            <h2><a href="/Home/HaberDetay/@haber.HaberID">@haber.Baslik</a></h2>
+            <div class="clearfix post-meta">
+                <p><span>@haber.Kategori.KategoriAdi</span> <span>@String.Format("{0: MMMMM yyyy}", haber.EklenmeTarihi)</span></p>
+            </div>
+            <div class="clearfix post_excerpt">
+                <img src="@haber.Resim.OrtaBoy" />
+                <p>
+                    @contentPart(haber.Icerik) ...
+                </p>
+            </div>
+            <a href="/Home/HaberDetay/@haber.HaberID">Devamını oku >></a>
+        </div>
+    </div>
+}
+
+<div class="container">
+    <div class="row table">
+        <div class="text-center col-lg-8">
+            <ul class="pagination pagination-responsive pagination-lg">
+                @Html.PagedListPager(Model, page => Url.Action("Index", new { page }), PagedListRenderOptions.Classic);
+            </ul>
+        </div>
+    </div>
+</div>
+
+

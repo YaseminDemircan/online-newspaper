@@ -1,0 +1,231 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+
+
+<head>
+    <title>Welcome to my site</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!--Oswald Font -->
+    <link href='http://fonts.googleapis.com/css?family=Oswald:400,300,700' rel='stylesheet' type='text/css'>
+    <link href="~/Content/tooltipster.css" rel="stylesheet" />
+    <link href="~/Content/pgwslider.css" rel="stylesheet" />
+    <link href="~/Content/font-awesome.min.css" rel="stylesheet" />
+    <link href="~/Content/style.css" rel="stylesheet" />
+    <link href="~/Content/responsive.css" rel="stylesheet" />    
+    @RenderSection("head", false)
+</head>
+<body>
+    <section id="header_area">
+        <div class="wrapper header">
+            <div class="clearfix header_top">
+                <div class="clearfix logo floatleft">
+                    <a href="/Home/Index/"><h1><span>Haberler</span>&nbsp;&nbsp;@DateTime.Now.ToShortDateString()</h1></a>
+                </div>
+                <div class="clearfix search floatright">
+                    @{
+                        Html.RenderPartial("Arama");
+                    }
+                </div>
+            </div>
+            <div class="header_bottom">
+                <nav>
+                    <ul id="nav">
+                        <li><a href="/Home/Index/">Anasayfa</a></li>
+                        @{
+                            Html.RenderAction("Kategori", "Home");
+                        }
+                        @{
+                            Html.RenderAction("TumKategoriler", "Home");
+                        }
+                        @*<li><a href="/Home/Index/"></a></li>
+          
+                        <li id="dropdown">
+                            <a href="">Drop Down</a>
+                            <ul>
+                                <li><a href="">Home</a></li>
+                                <li><a href="">Cate</a></li>
+                                <li><a href="">Category</a></li>
+                                <li><a href="">Category</a></li>
+                                <li><a href="">Category</a></li>
+                                <li><a href="">Category</a></li>
+                                <li><a href="">Category</a></li>
+                                <li><a href="">Category</a></li>
+                                <li><a href="">Category</a></li>
+                                <li><a href="">About us</a></li>
+                                <li><a href="">Contact us</a></li>
+                            </ul>
+                        </li>*@
+                        
+                        
+                        
+
+
+
+                        @if (Session["uyeId"] != null)
+                        {
+                            
+                            <li id="dropdown">
+                                <a>@Session["kullaniciAdi"].ToString()</a>
+                                <ul>
+                                    @if (Convert.ToInt32(Session["yetkiId"]) == 1)
+                                    {
+                                        <li><a href="/AdminHaber/Index/" target="_blank">Admin Paneli</a></li>
+                                    }
+                                    <li><a href="/Uye/Index/@Session["uyeId"]">Profil</a></li>
+                                    <li><a href="/Uye/Logout/">Çıkış yap</a></li>
+                                </ul>
+                            </li>
+                        }
+                        else
+                        {
+                            <li><a href="/Uye/Create/">Kaydol</a></li>
+                            <li><a href="/Uye/Login/">Giriş yap</a></li>
+                        }
+                    </ul>
+                  </nav>
+            </div>
+        </div>
+    </section>
+
+    <section id="content_area">
+        <div class="clearfix wrapper main_content_area">
+            
+            <div class="clearfix main_content floatleft">
+               
+                @*@{
+                    Html.RenderAction("Slider", "Home");
+                }*@
+                
+                <div class="clearfix content">
+                    @RenderBody()
+                </div>
+
+                @*<div class="pagination">
+                    <nav>
+                        <ul>
+                            <li><a href=""> << </a></li>
+                            <li><a href="">1</a></li>
+                            <li><a href="">2</a></li>
+                            <li><a href="">3</a></li>
+                            <li><a href="">4</a></li>
+                            <li><a href=""> >> </a></li>
+                        </ul>
+                    </nav>
+                </div>*@
+            </div>
+            <div class="clearfix sidebar_container floatright">
+
+               <!--<div class="clearfix newsletter">
+                    <form>
+                        <h2>Signup for newsletter</h2>
+                        <input type="text" placeholder="Name" id="mce-TEXT" />
+                        <input type="email" placeholder="Name" id="mce-EMAIL" />
+                        <input type="submit" value="Submit" id="mc-embedded-subscribe" />
+                    </form>
+                </div>-->
+                <div class="clearfix sidebar">
+                    <a class="tooltip" title="Facebook" href="https://www.facebook.com/sputnik.turk" target="_blank"><img src="~/Images/icon/facebook.jpg" width="25" height="25" /></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <a class="tooltip" title="Twitter" href="https://twitter.com/sputnik_TR" target="_blank"><img src="~/Images/icon/twitter.png" width="25" height="25" /></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <a class="tooltip" title="Youtube" href="https://www.youtube.com/channel/UCcFUqQU3grpW4wZFaTmUaag" target="_blank"><img src="~/Images/icon/youtube.png" width="25" height="25" /></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <a class="tooltip" title="Instagram" href="https://www.instagram.com/sputnik_turkiye/" target="_blank"><img src="~/Images/icon/instagram.png" width="25" height="25" /></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <a class="tooltip" title="SoundCloud" href="https://soundcloud.com/sputnik-tr" target="_blank"><img src="~/Images/icon/soundcloud.png"  width="25" height="25"/></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <a class="tooltip" title="SoundCloud" href="https://tr.sputniknews.com/popup/radio/" target="_blank"><img src="~/Images/icon/canlıyayın.jpg" width="50" height="25" /></a>
+                    <div class="clearfix single_sidebar">
+                        @{
+                            Html.RenderAction("SonHaberler", "Home");
+                        }
+                    </div>
+                    @*<div class="clearfix single_sidebar category_items">
+                        
+                       
+                    </div>*@
+                    <div class="clearfix single_sidebar">
+                        @{
+                            Html.RenderAction("CokOkunanHaberler", "Home");
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="footer_top_area">
+        <div class="clearfix wrapper footer_top">
+            <div class="clearfix footer_top_container">
+                <div class="clearfix single_footer_top floatleft"> 
+                    @{
+                        Html.RenderAction("CokOkunanHaberler", "Home");
+                    }
+                </div>
+                <div class="clearfix single_footer_top floatleft">
+                    @{
+                        Html.RenderPartial("Gazeteler");
+                    }
+                </div>
+                <div class="clearfix single_footer_top floatleft">
+                    @{
+                        Html.RenderAction("Kategoriler", "Home");
+                    }
+                    @*<h2>Usefull Links</h2>
+                    <ul>
+                        <li><a href="">Important links of this site</a></li>
+                        <li><a href="">Important links of this site</a></li>
+                        <li><a href="">Important links of this site</a></li>
+                        <li><a href="">Important links of this site</a></li>
+                        <li><a href="">Important links of this site</a></li>
+                        <li><a href="">Important links of this site</a></li>
+                    </ul>*@
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="footer_bottom_area">
+        <div class="clearfix wrapper footer_bottom">
+            <div class="clearfix copyright floatleft">
+                <p> Copyright &copy; All rights reserved by <span>Wpfreeware.com</span></p>
+            </div>
+            <div class="clearfix social floatright">
+                <ul>
+                    <li><a class="tooltip" title="Facebook" href="https://www.facebook.com/sputnik.turk" target="_blank"><img src="~/Images/icon/facebook.jpg" width="25" height="25" /></a></li>
+                    <li><a class="tooltip" title="Twitter" href="https://twitter.com/sputnik_TR" target="_blank"><img src="~/Images/icon/twitter.png" width="25" height="25" /></a></li>
+                    <li><a class="tooltip" title="Youtube" href="https://www.youtube.com/channel/UCcFUqQU3grpW4wZFaTmUaag" target="_blank"><img src="~/Images/icon/youtube.png" width="25" height="25" /></a></li>
+                    <li><a class="tooltip" title="Instagram" href="https://www.instagram.com/sputnik_turkiye/" target="_blank"><img src="~/Images/icon/instagram.png" width="25" height="25" /></a></li>
+                    <li><a class="tooltip" title="SoundCloud" href="https://soundcloud.com/sputnik-tr" target="_blank"><img src="~/Images/icon/soundcloud.png" /></a></li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <script type="text/javascript" src="http://code.jquery.com/jquery-1.7.0.min.js"></script>
+    
+    <script src="~/Content/jquery.tooltipster.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('.tooltip').tooltipster();
+        });
+    </script>
+    
+    <script src="~/Content/selectnav.min.js"></script>
+    <script type="text/javascript">
+        selectnav('nav', {
+            label: '-Navigation-',
+            nested: true,
+            indent: '-'
+        });
+    </script>
+    
+    <script src="~/Content/pgwslider.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('.pgwSlider').pgwSlider({
+
+                intervalDuration: 5000
+
+            });
+        });
+    </script>
+    <script src="~/Content/placeholder_support_IE.js"></script>
+</body>
+</html>

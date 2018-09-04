@@ -1,0 +1,14 @@
+﻿@using NewsMVC.Models;
+@model IEnumerable<Haber>
+
+
+<div class="popular_post">
+    <div class="sidebar_title"><h2>&nbsp;Son Dakika</h2></div>
+@foreach (Haber haber in Model)
+{
+    <ul>
+        <li><a href="/Home/HaberDetay/@haber.HaberID">@haber.Baslik</a></li>
+    </ul>
+}
+</div>
+

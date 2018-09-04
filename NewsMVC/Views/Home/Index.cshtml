@@ -1,0 +1,21 @@
+﻿@using NewsMVC.Models;
+@model IEnumerable<Haber>
+
+@{
+    Html.RenderAction("Slider", "Home");
+}
+
+<div class="sidebar_title"><h2>&nbsp;&nbsp;ÖNE ÇIKANLAR</h2></div>
+
+<div class="more_themes">
+    <div class="more_themes_container">
+        @foreach (Haber haber in Model)
+        {
+            <div class="single_more_themes floatleft">
+                <a href="/Home/HaberDetay/@haber.HaberID"><img src="@haber.Resim.OrtaBoy" width="220" height="150" /></a>
+                <a href="/Home/HaberDetay/@haber.HaberID">@haber.Baslik</a>
+            </div>
+        }
+    </div>
+</div>
+

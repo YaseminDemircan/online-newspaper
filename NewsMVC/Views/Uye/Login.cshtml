@@ -1,0 +1,40 @@
+﻿@model NewsMVC.Models.Uye
+
+@{
+    ViewBag.Title = "Giriş Yap";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+@using (Html.BeginForm()) 
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        
+        <strong>@ViewBag.Uyari</strong>
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.KullaniciAdi, "Kullanıcı adı", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.KullaniciAdi, new { htmlAttributes = new { @class = "form-control", @required="" } })
+                @Html.ValidationMessageFor(model => model.KullaniciAdi, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Sifre, "Şifre", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Sifre, new { htmlAttributes = new { @class = "form-control", required = "" } })
+                @Html.ValidationMessageFor(model => model.Sifre, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Giriş yap" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+

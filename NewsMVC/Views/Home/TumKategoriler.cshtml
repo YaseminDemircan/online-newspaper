@@ -1,0 +1,12 @@
+﻿@using NewsMVC.Models;
+@model IEnumerable<Kategori>
+
+<li id="dropdown">
+    <a>Tüm Kategoriler</a>
+    <ul>
+        @foreach (Kategori kategori in Model)
+        {
+            <li><a href="/Home/KategoriHaber/@kategori.KategoriId">@kategori.KategoriAdi</a></li>
+        }
+    </ul>
+</li>

@@ -1,0 +1,206 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="NewsMVCdbModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Etikett">
+    <Key>
+      <PropertyRef Name="EtiketId" />
+    </Key>
+    <Property Name="EtiketId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="EtiketAdi" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="Habers" Relationship="Self.HaberEtiket" FromRole="Etikett" ToRole="Haber" />
+  </EntityType>
+  <EntityType Name="Haber">
+    <Key>
+      <PropertyRef Name="HaberID" />
+    </Key>
+    <Property Name="HaberID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Baslik" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Icerik" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="EklenmeTarihi" Type="DateTime" Precision="3" />
+    <Property Name="KategoriID" Type="Int32" />
+    <Property Name="ResimID" Type="Int32" />
+    <NavigationProperty Name="Kategori" Relationship="Self.FK_Haber_Kategori" FromRole="Haber" ToRole="Kategori" />
+    <NavigationProperty Name="Resim" Relationship="Self.FK_Haber_Resim" FromRole="Haber" ToRole="Resim" />
+    <NavigationProperty Name="Yorums" Relationship="Self.FK_Yorum_Haber" FromRole="Haber" ToRole="Yorum" />
+    <NavigationProperty Name="Etiketts" Relationship="Self.HaberEtiket" FromRole="Haber" ToRole="Etikett" />
+    <Property Name="Giris" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="Kategori">
+    <Key>
+      <PropertyRef Name="KategoriId" />
+    </Key>
+    <Property Name="KategoriId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="KategoriAdi" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="Habers" Relationship="Self.FK_Haber_Kategori" FromRole="Kategori" ToRole="Haber" />
+  </EntityType>
+  <EntityType Name="Resim">
+    <Key>
+      <PropertyRef Name="ResimId" />
+    </Key>
+    <Property Name="ResimId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="KucukBoy" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="OrtaBoy" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="BuyukBoy" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="HaberId" Type="Int32" />
+    <NavigationProperty Name="Habers" Relationship="Self.FK_Haber_Resim" FromRole="Resim" ToRole="Haber" />
+    <NavigationProperty Name="Uyes" Relationship="Self.FK_Uye_Resim" FromRole="Resim" ToRole="Uye" />
+  </EntityType>
+  <EntityType Name="sysdiagram">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="Uye">
+    <Key>
+      <PropertyRef Name="UyeId" />
+    </Key>
+    <Property Name="UyeId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="KullaniciAdi" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Sifre" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="AdSoyad" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="ResimID" Type="Int32" />
+    <Property Name="YetkiId" Type="Int32" />
+    <NavigationProperty Name="Resim" Relationship="Self.FK_Uye_Resim" FromRole="Uye" ToRole="Resim" />
+    <NavigationProperty Name="Yetki" Relationship="Self.FK_Uye_Yetki" FromRole="Uye" ToRole="Yetki" />
+    <NavigationProperty Name="Yorums" Relationship="Self.FK_Yorum_Uye" FromRole="Uye" ToRole="Yorum" />
+  </EntityType>
+  <EntityType Name="Yetki">
+    <Key>
+      <PropertyRef Name="YetkiId" />
+    </Key>
+    <Property Name="YetkiId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Yetki1" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Uyes" Relationship="Self.FK_Uye_Yetki" FromRole="Yetki" ToRole="Uye" />
+  </EntityType>
+  <EntityType Name="Yorum">
+    <Key>
+      <PropertyRef Name="YorumId" />
+    </Key>
+    <Property Name="YorumId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Icerik" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="UyeId" Type="Int32" />
+    <Property Name="HaberId" Type="Int32" />
+    <Property Name="Tarih" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="Haber" Relationship="Self.FK_Yorum_Haber" FromRole="Yorum" ToRole="Haber" />
+    <NavigationProperty Name="Uye" Relationship="Self.FK_Yorum_Uye" FromRole="Yorum" ToRole="Uye" />
+  </EntityType>
+  <Association Name="FK_Haber_Kategori">
+    <End Role="Kategori" Type="Self.Kategori" Multiplicity="0..1" />
+    <End Role="Haber" Type="Self.Haber" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Kategori">
+        <PropertyRef Name="KategoriId" />
+      </Principal>
+      <Dependent Role="Haber">
+        <PropertyRef Name="KategoriID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Haber_Resim">
+    <End Role="Resim" Type="Self.Resim" Multiplicity="0..1" />
+    <End Role="Haber" Type="Self.Haber" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Resim">
+        <PropertyRef Name="ResimId" />
+      </Principal>
+      <Dependent Role="Haber">
+        <PropertyRef Name="ResimID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Yorum_Haber">
+    <End Role="Haber" Type="Self.Haber" Multiplicity="0..1" />
+    <End Role="Yorum" Type="Self.Yorum" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Haber">
+        <PropertyRef Name="HaberID" />
+      </Principal>
+      <Dependent Role="Yorum">
+        <PropertyRef Name="HaberId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Uye_Resim">
+    <End Role="Resim" Type="Self.Resim" Multiplicity="0..1" />
+    <End Role="Uye" Type="Self.Uye" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Resim">
+        <PropertyRef Name="ResimId" />
+      </Principal>
+      <Dependent Role="Uye">
+        <PropertyRef Name="ResimID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Uye_Yetki">
+    <End Role="Yetki" Type="Self.Yetki" Multiplicity="0..1" />
+    <End Role="Uye" Type="Self.Uye" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Yetki">
+        <PropertyRef Name="YetkiId" />
+      </Principal>
+      <Dependent Role="Uye">
+        <PropertyRef Name="YetkiId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Yorum_Uye">
+    <End Role="Uye" Type="Self.Uye" Multiplicity="0..1" />
+    <End Role="Yorum" Type="Self.Yorum" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Uye">
+        <PropertyRef Name="UyeId" />
+      </Principal>
+      <Dependent Role="Yorum">
+        <PropertyRef Name="UyeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="HaberEtiket">
+    <End Role="Etikett" Type="Self.Etikett" Multiplicity="*" />
+    <End Role="Haber" Type="Self.Haber" Multiplicity="*" />
+  </Association>
+  <EntityContainer Name="NewsMVCdbEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Etiketts" EntityType="Self.Etikett" />
+    <EntitySet Name="Habers" EntityType="Self.Haber" />
+    <EntitySet Name="Kategoris" EntityType="Self.Kategori" />
+    <EntitySet Name="Resims" EntityType="Self.Resim" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
+    <EntitySet Name="Uyes" EntityType="Self.Uye" />
+    <EntitySet Name="Yetkis" EntityType="Self.Yetki" />
+    <EntitySet Name="Yorums" EntityType="Self.Yorum" />
+    <AssociationSet Name="FK_Haber_Kategori" Association="Self.FK_Haber_Kategori">
+      <End Role="Kategori" EntitySet="Kategoris" />
+      <End Role="Haber" EntitySet="Habers" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Haber_Resim" Association="Self.FK_Haber_Resim">
+      <End Role="Resim" EntitySet="Resims" />
+      <End Role="Haber" EntitySet="Habers" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Yorum_Haber" Association="Self.FK_Yorum_Haber">
+      <End Role="Haber" EntitySet="Habers" />
+      <End Role="Yorum" EntitySet="Yorums" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Uye_Resim" Association="Self.FK_Uye_Resim">
+      <End Role="Resim" EntitySet="Resims" />
+      <End Role="Uye" EntitySet="Uyes" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Uye_Yetki" Association="Self.FK_Uye_Yetki">
+      <End Role="Yetki" EntitySet="Yetkis" />
+      <End Role="Uye" EntitySet="Uyes" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Yorum_Uye" Association="Self.FK_Yorum_Uye">
+      <End Role="Uye" EntitySet="Uyes" />
+      <End Role="Yorum" EntitySet="Yorums" />
+    </AssociationSet>
+    <AssociationSet Name="HaberEtiket" Association="Self.HaberEtiket">
+      <End Role="Etikett" EntitySet="Etiketts" />
+      <End Role="Haber" EntitySet="Habers" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

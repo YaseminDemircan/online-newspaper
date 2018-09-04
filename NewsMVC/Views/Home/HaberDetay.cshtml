@@ -1,0 +1,59 @@
+﻿@using NewsMVC.Models
+@model Haber
+
+@using Microsoft.Web.Helpers;
+
+@{
+    ViewBag.Title = "";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<section id="content_area">
+    <div class="clearfix wrapper main_content_area">
+
+        <div class="clearfix main_content floatleft">
+
+
+            <div class="clearfix content">
+
+                <h1>@Model.Baslik</h1>
+                <br />
+
+                <div class="clearfix post-meta">
+                    <p><span>@Model.Kategori.KategoriAdi</span> <span>@Model.EklenmeTarihi.Value.ToShortDateString()</span>&nbsp;@LinkShare.GetHtml("bbb", linkSites: new[] { LinkShareSite.Facebook, LinkShareSite.Twitter, LinkShareSite.Digg, LinkShareSite.Reddit, LinkShareSite.StumbleUpon })</p>
+                </div>
+                <br />
+
+                <p><b>@Model.Giris</b></p>
+                <br />
+                <br />
+                <img src="@Model.Resim.OrtaBoy" width="700" height="200" />
+                <br />
+                <br />
+                <br />
+                <br />
+
+                <p>
+                    @Model.Icerik
+                </p>
+
+            </div>
+
+            <br />
+            <br />
+
+            <div>
+                @LinkShare.GetHtml("bbb", linkSites: new[] { LinkShareSite.Facebook, LinkShareSite.Twitter, LinkShareSite.Digg, LinkShareSite.Reddit, LinkShareSite.StumbleUpon })
+            </div>
+
+            @{
+                Html.RenderAction("BenzerHaberler", "Home");
+            }
+
+
+
+
+        </div>
+    </div>
+</section>
+

@@ -1,0 +1,66 @@
+﻿@model NewsMVC.Models.Uye
+
+@{
+    ViewBag.Title = "Üye Detay";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+
+
+<div>
+   
+    <dl class="dl-horizontal">
+        <dt>
+           Kullanıcı adı
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.KullaniciAdi)
+        </dd>
+
+        <dt>
+            E-mail
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Email)
+        </dd>
+
+        <dt>
+            Şifre
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Sifre)
+        </dd>
+
+        <dt>
+           Ad Soyad
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AdSoyad)
+        </dd>
+
+        <dt>
+            Fotoğraf
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Resim.KucukBoy)
+        </dd>
+
+        <dt>
+           Yetki
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Yetki.Yetki1)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Düzenle", "Edit", new { id = Model.UyeId }) |
+    @Html.ActionLink("Geri dön", "Index")
+</p>

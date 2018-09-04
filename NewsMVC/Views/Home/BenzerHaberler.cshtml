@@ -1,0 +1,16 @@
+﻿@using NewsMVC.Models;
+@model IEnumerable<Haber>
+
+
+<div class="more_themes">
+    <h2>Diğer Haberler</h2>
+    <div class="more_themes_container">
+        @foreach (Haber diger in Model)
+        {
+            <div class="single_more_themes floatleft">
+            <a href="/Home/HaberDetay/@diger.HaberID"><img src="@diger.Resim.OrtaBoy" width="220" height="150" /></a>
+            <a href="/Home/HaberDetay/@diger.HaberID">@diger.Baslik</a>
+            </div>
+        }
+    </div>
+</div>

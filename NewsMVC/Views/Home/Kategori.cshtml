@@ -1,0 +1,20 @@
+﻿@using NewsMVC.Models;
+@model IEnumerable<Kategori>
+
+
+@*@foreach (Kategori kategori in Model)
+{
+<ul>
+    <li class="cat-item"><a href="/Home/KategoriHaber/@kategori.KategoriId">@kategori.KategoriAdi</a>@kategori.Habers.Count()</li>
+</ul>
+}*@
+
+
+@foreach (Kategori kategori in Model)
+{
+        <ul>
+            <li><a href="/Home/KategoriHaber/@kategori.KategoriId">@kategori.KategoriAdi</a></li>
+        </ul>
+}
+
+    

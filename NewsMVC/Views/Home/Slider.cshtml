@@ -1,0 +1,18 @@
+﻿@using NewsMVC.Models;
+@model IEnumerable<Haber>
+
+<link href="~/Content/pgwslider.css" rel="stylesheet" />
+
+
+<div class="clearfix slider">
+
+    <ul class="pgwSlider">
+        @foreach (Haber h in Model)
+        {
+
+            <li><a href="/Home/HaberDetay/@h.HaberID"><img src="@h.Resim.OrtaBoy" data-description="@h.Baslik" /></a></li>
+
+        }
+    </ul>
+</div>
+

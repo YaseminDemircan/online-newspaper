@@ -1,0 +1,13 @@
+﻿@using NewsMVC.Models;
+@model IEnumerable<Kategori>
+
+
+<div class="popular_post">
+    <div class="sidebar_title"><h2>&nbsp;Tüm Kategoriler</h2></div>
+    @foreach (Kategori kategori in Model)
+    {
+        <ul>
+            <li><a href="/Home/KategoriHaber/@kategori.KategoriId">@kategori.KategoriAdi</a></li>
+        </ul>
+    }
+    </div>

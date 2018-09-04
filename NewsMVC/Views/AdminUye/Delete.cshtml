@@ -1,0 +1,71 @@
+﻿@model NewsMVC.Models.Uye
+
+@{
+    ViewBag.Title = "Sil";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+
+<h3>Silmek istediğinize emin misiniz?</h3>
+<div>
+    
+    <dl class="dl-horizontal">
+        <dt>
+            Kullanıcı adı
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.KullaniciAdi)
+        </dd>
+
+        <dt>
+            E-mail
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Email)
+        </dd>
+
+        <dt>
+           Şifre
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Sifre)
+        </dd>
+
+        <dt>
+            Ad Soyad
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AdSoyad)
+        </dd>
+
+        <dt>
+           Fotoğraf
+        </dt>
+
+        <dd>
+            <img src="@Model.Resim.KucukBoy" width="80" />
+        </dd>
+
+        <dt>
+            Yetki
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Yetki.Yetki1)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Sil" class="btn btn-default" /> |
+            @Html.ActionLink("Geri dön", "Index")
+        </div>
+    }
+</div>
